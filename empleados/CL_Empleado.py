@@ -2,19 +2,32 @@ from Usuarios.CL_Usuario import Usuario
 from datetime import datetime
 
 
-class CL_Empleado(Usuario):
-    fecha_ingreso_em: datetime
+class Empleado(Usuario):
+    fecha_ingreso: datetime
     rfc: str
     salario: float
     horario: str
 
-    def __init__(self, em_nombre: str, em_apellido: str, em_fecha_nacimiento: datetime,em_fecha_ingreso:datetime, em_rfc:str, em_salario:float, em_horario:str, us_CURP: str):
+    def __init__(self, em_nombre: str, em_apellido: str, em_fecha_nacimiento: datetime, em_CURP: str,em_fecha_ingreso:datetime, em_rfc:str, em_salario:float, em_horario:str):
         super().__init__(
-            em_nombre, 
-            em_apellido, 
-            em_fecha_nacimiento, 
-            em_CURP)
-        self.fecha_ingreso_em
-        self.rfc
-        self.salario
-        self.horario
+            us_nombre=em_nombre, 
+            us_apellido=em_apellido, 
+            us_fecha_nacimiento=em_fecha_nacimiento, 
+            us_CURP=em_CURP,)
+        
+        self.fecha_ingreso=em_fecha_ingreso
+        self.rfc=em_rfc
+        self.salario=em_salario
+        self.horario=em_horario
+        
+
+    def mostrar_info_empleado(self):
+        nombre_completo= f"{self.nombre} {self.apellido}"
+        info_empleado= f"Nombre: {nombre_completo}, 
+        Fecha de nacimiento: {self.fecha_nacimiento}, 
+        Fecha de ingreso: {self.fecha_ingreso}, 
+        RFC: {self.rfc}, 
+        Salario: {self.salario}, 
+        Horario: {self.horario},
+        CURP: {self.CURP}"
+        return info_empleado

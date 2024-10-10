@@ -1,6 +1,9 @@
 from enum import Enum
 
-class Rol(Enum):
+class Roles(Enum):
     VISITANTE = "Visitante"
-    EMPLEADO = "Empleado"
+    VETERINARIO = "Veterinario"
+    MANTENIMIENTO = "Mantenimiento"
+    GUIA = "Guía"
+    DIRECTOR = "Director"
     
