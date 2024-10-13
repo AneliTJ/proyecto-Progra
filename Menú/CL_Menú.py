@@ -3,12 +3,18 @@ from Veterinario.CL_Veterinario import Veterinario
 from Zoologico.CL_Zoologico import Zoologico
 from Guia.CL_Guía import Guia
 from Mantenimiento.CL_Mantenimiento import Mantenimiento
+from Animales.CL_Animal import Animal
+from Visitantes.CL_Visitante import Visitante
+from Visita.CL_Visita import Visita
+
 
 class Menú:
-
     zoo: Zoologico = Zoologico()
     
+    
     def mostrar_menú(self):
+        num_visitas =0
+        precio = 0
         while True:
             print(
                 """
@@ -17,8 +23,18 @@ class Menú:
     1. Registrar Empleado (Veterinario)
     2. Registrar Empleado (Mantenimiento)
     3. Registrar Empleado (Guía)
+    4. Registrar Animal
+    5. Registrar Visitante
+    6. Registrar Visita
 
     10. Mostrar Empleados (Veterinario)
+    11. Mostrar Empleados (Mantenimiento)
+    12. Mostrar Empleados (Guía)
+    13. Mostrar Animales
+    14. Mostrar Visitas
+    
+    20.Costo de la visita
+
 
     40. Salir
     """
@@ -119,9 +135,126 @@ class Menú:
                              guia_salario=salario,
                              guia_horario=horario)
                 
-                self.zoo.reg_guia(-_guia)
+                self.zoo.reg_guia(_guia)
                 self.zoo.reg_guia(guiaReg=_guia)
+
+            if opcion == 4:
+                print("\n+++ Registrar Animal +++")
+                id_animal = input("Ingresa el ID del animal: ")
+                tipo_animal = input("Ingresa el tipo de animal: ")
+
+                dia_nacimiento = int(input("Ingresa el día de nacimiento: "))
+                mes_nacimiento = int(input("Ingresa el mes de nacimiento: "))
+                año_nacimiento = int(input("Ingresa el año de nacimiento: "))
+                f_ani_nacimiento = datetime(año_nacimiento, mes_nacimiento, dia_nacimiento)
+
+                dia_llegada = int(input("Ingresa el día de llegada: "))
+                mes_llegada = int(input("Ingresa el mes de llegada: "))
+                año_llegada = int(input("Ingresa el año de llegada: "))
+                f_llegada = datetime(año_llegada, mes_llegada, dia_llegada)
+
+                enfermedades = []
+                while True:
+                     enfermedad = input("Ingresa las enfermedades o fin en caso de no contar con ninguna: ")
+                     if enfermedad.lower() in ["fin", "f", "nif", "fni"]:
+                         break
+                     enfermedades.append(enfermedad)
+
+                tipo_alimentacion = input("Ingresa el tipo de alimentación: ")
+                peso = input("Ingresa el peso del animal: ")
+                frec_alimentación = input("Ingresa la frecuencia de alimentación: ")
+                vacunas = input("¿Cuenta con vacunas? (s/n): ").lower() == 's'
+
+                _animal = Animal(
+                    id_animal=id_animal,
+                    tipo_animal=tipo_animal,
+                    fecha_llegada=f_llegada,
+                    fecha_nacimiento=f_ani_nacimiento,
+                    enfermedades=enfermedades,
+                    tipo_alimentacion=tipo_alimentacion,
+                    peso=peso,
+                    frecuencia_alimentacion=frec_alimentación,
+                    vacunas=vacunas
+                )
+
+                self.zoo.reg_animal(_animal)
+                self.zoo.reg_animal(animalReg=_animal)
+
+            if opcion == 5:
+                print("\n+++ Registrar Visitante +++")
+                nombre = input("\nIngresa el nombre: ")
+                apellido = input("Ingresa los apellidos: ")
+                curp =  input("Ingresa la CURP: ")
+
+                dia_nacimiento = int(input("Ingresa el día de nacimiento: "))
+                mes_nacimiento = int(input("Ingresa el mes de nacimiento: "))
+                año_nacimiento = int(input("Ingresa el año de nacimiento: "))
+                f_nacimiento = datetime(año_nacimiento, mes_nacimiento, dia_nacimiento)
+
+                dia_ingreso = int(input("Ingresa el día de ingreso: "))
+                mes_ingreso = int(input("Ingresa el mes de ingreso: "))
+                año_ingreso = int(input("Ingresa el año de ingreso: "))
+                f_ingreso = datetime(año_ingreso, mes_ingreso, dia_ingreso)
+                id_visitante=self.zoo.generar_id_visitantes()
+                num_visitas +=1
+
+                _visitante = Visitante(
+                    vi_nombre=nombre,
+                    vi_apellido=apellido,
+                    vi_CURP=curp,
+                    vi_fecha_nacimiento=f_nacimiento,
+                    vi_fecha_reg=f_ingreso,
+                    vi_num_visitas=num_visitas,
+                    vi_id_visitas=id_visitante)
+
+                self.zoo.reg_visitante(_visitante)
+                self.zoo.reg_visitante(visitanteReg=_visitante)
+                print(id_visitante)
+        
+                
+            if opcion == 6:
+                print("\n+++ Registrar Visita +++")
+                costo = float(input("Ingrese el costo total: "))
+                cant_ninos = int(input("Ingrese la cantidad de niños: "))
+                cant_adultos = int(input("Ingrese la cantidad de adultos: "))
+                fecha = datetime.now()
+
+                _visita = Visita(costo_total=costo,
+                                 cant_ninos=cant_ninos,
+                                 cant_adultos=cant_adultos,
+                                 fecha_visita=fecha)
+                
+                
 
             if opcion == 10:
                 self.zoo.mostrar_veterinarios()
                 pass
+
+            if opcion == 11:
+                self.zoo.mostrar_mantenimientos()
+                pass
+
+            if opcion == 12:
+                self.zoo.mostrar_guias()
+                pass
+            
+            if opcion == 13:
+                self.zoo.mostrar_animales()
+                pass
+
+            if opcion == 14:
+                self.zoo.mostrar_visitantes()
+                pass
+
+            if opcion == 15:
+                pass
+            
+
+
+            if opcion == 20:
+                print("\n+++ Costo de la visita +++")
+                print(precio)
+
+            if opcion == 40:
+                precio = 0
+                break

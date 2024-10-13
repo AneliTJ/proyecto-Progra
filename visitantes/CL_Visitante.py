@@ -5,8 +5,15 @@ from datetime import datetime
 class Visitante(Usuario):
     num_visitas: int
     fecha_reg: datetime
+    id_visitas= str
     
-    def __init__(self, vi_nombre: str, vi_apellido: str, vi_fecha_nacimiento: datetime, vi_CURP: str, vi_num_visitas:int, vi_fecha_reg:datetime):
+    def __init__(self, 
+                vi_nombre: str, 
+                vi_apellido: str, 
+                vi_fecha_nacimiento: datetime, 
+                vi_CURP: str, vi_num_visitas:int, 
+                vi_fecha_reg:datetime,
+                vi_id_visitas: str):
         
         super().__init__(
             us_nombre=vi_nombre, 
@@ -14,17 +21,18 @@ class Visitante(Usuario):
             us_fecha_nacimiento=vi_fecha_nacimiento, 
             us_CURP=vi_CURP,
             rol= Roles.VISITANTE)
-        
+    
         self.num_visitas=vi_num_visitas
         self.fecha_reg=vi_fecha_reg
+        self.id_visitas=vi_id_visitas
 
     def mostrar_info_visitante(self):
         nombre_completo= f"{self.nombre} {self.apellido}"
-        info_visitante= f"Nombre: {nombre_completo}, 
+        info_visitante= f"""Nombre: {nombre_completo}, 
         Fecha de nacimiento: {self.fecha_nacimiento},
         CURP: {self.CURP}, 
         Numero de visitas: {self.num_visitas},
-        Fecha de registro: {self.fecha_reg}"
+        Fecha de registro: {self.fecha_reg}"""
         return info_visitante
     
     
