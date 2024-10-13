@@ -4,7 +4,8 @@ from Usuarios.utils.Rol import Roles
 
 class Mantenimiento(Empleado):
     
-    def __init__(self, mant_nombre: str,
+    def __init__(self,
+                 mant_nombre: str,
                  mant_apellido: str,
                  mant_CURP: str,
                  mant_fecha_nacimiento: datetime,
@@ -24,5 +25,4 @@ class Mantenimiento(Empleado):
             em_salario=mant_salario,
             em_horario=mant_horario,
             rol=Roles.MANTENIMIENTO)
-        
         pass

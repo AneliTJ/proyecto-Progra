@@ -4,13 +4,14 @@ from Usuarios.utils.Rol import Roles
 
 class Veterinario(Empleado):
     
-    def __init__(self, vet_nombre: str,
+    def __init__(self,
+                 vet_nombre: str,
                  vet_apellido: str,
                  vet_CURP: str,
                  vet_fecha_nacimiento: datetime,
                  vet_fecha_ingreso: datetime,
                  vet_RFC: str,
-                 vet_salario: str,
+                 vet_salario: float,
                  vet_horario: str
                  ):
         
@@ -23,7 +24,9 @@ class Veterinario(Empleado):
             em_rfc=vet_RFC,
             em_salario=vet_salario,
             em_horario=vet_horario,
-            rol=Roles.VETERINARIO)
+            rol=Roles.VETERINARIO
+            )
+        
         pass
 
     
