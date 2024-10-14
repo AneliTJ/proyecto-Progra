@@ -216,13 +216,20 @@ class Menú:
                 print("\n+++ Registrar Visita +++")
                 costo = float(input("Ingrese el costo total: "))
                 cant_ninos = int(input("Ingrese la cantidad de niños: "))
-                cant_adultos = int(input("Ingrese la cantidad de adultos: "))
+                cant_adul = int(input("Ingrese la cantidad de adultos: "))
                 fecha = datetime.now()
+                guia_CURP = input("Ingresa el CURP del guía: ")
+                vi_CURPS = input("Ingresa las CURP de los visitantes (separadas por comas): ").split(',')
+                vi_CURPS = [vi_CURP.strip() for vi_CURP in vi_CURPS]
 
                 _visita = Visita(costo_total=costo,
                                  cant_ninos=cant_ninos,
-                                 cant_adultos=cant_adultos,
-                                 fecha_visita=fecha)
+                                 cant_adul=cant_adul,
+                                 fecha_visita=fecha,
+                                 guia_CURP=guia_CURP,
+                                 vi_CURPS=vi_CURPS)
+                                
+                self.zoo.reg_visita(_visita)
                 
                 
 
