@@ -11,7 +11,8 @@ class Visitante(Usuario):
                 vi_nombre: str, 
                 vi_apellido: str, 
                 vi_fecha_nacimiento: datetime, 
-                vi_CURP: str, vi_num_visitas:int, 
+                vi_CURP: str, 
+                vi_num_visitas:int, 
                 vi_fecha_reg:datetime,
                 vi_id_visitas: str):
         
@@ -28,8 +29,9 @@ class Visitante(Usuario):
 
     def mostrar_info_visitante(self):
         nombre_completo= f"{self.nombre} {self.apellido}"
-        info_visitante= f"""Nombre: {nombre_completo}, 
-        Fecha de nacimiento: {self.fecha_nacimiento},
+        info_visitante = f"""
+        Nombre: {nombre_completo},
+        Fecha de nacimiento: {self.fecha_nacimiento}, 
         CURP: {self.CURP}, 
         Numero de visitas: {self.num_visitas},
         Fecha de registro: {self.fecha_reg}"""

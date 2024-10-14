@@ -31,7 +31,8 @@ class Menú:
     11. Mostrar Empleados (Mantenimiento)
     12. Mostrar Empleados (Guía)
     13. Mostrar Animales
-    14. Mostrar Visitas
+    14. Mostrar Visitantes
+    15. Mostrar Visitas
     
     20.Costo de la visita
 
@@ -196,7 +197,6 @@ class Menú:
                 año_ingreso = int(input("Ingresa el año de ingreso: "))
                 f_ingreso = datetime(año_ingreso, mes_ingreso, dia_ingreso)
                 id_visitante=self.zoo.generar_id_visitantes()
-                num_visitas +=1
 
                 _visitante = Visitante(
                     vi_nombre=nombre,
@@ -230,9 +230,7 @@ class Menú:
                                  vi_CURPS=vi_CURPS)
                                 
                 self.zoo.reg_visita(_visita)
-                
-                
-
+         
             if opcion == 10:
                 self.zoo.mostrar_veterinarios()
                 pass
@@ -254,9 +252,7 @@ class Menú:
                 pass
 
             if opcion == 15:
-                pass
-            
-
+                self.zoo.mostrar_visitas()
 
             if opcion == 20:
                 print("\n+++ Costo de la visita +++")
