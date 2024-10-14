@@ -70,7 +70,7 @@ class Zoologico:
         self.lista_visitantes_niños.append(visitanteReg)
         self.lista_usuarios.append(visitanteReg)
 
-    def reg_visita(self, visitaReg: Visita, guia_CURP: str, vi_CURPS_: list):
+    def reg_visita(self, guia_CURP: str, vi_CURPS: list):
 
         fecha_visita = datetime.now()
         guia = None
@@ -88,7 +88,7 @@ class Zoologico:
         cant_ninos = 0
         cant_adul = 0
 
-        for vi_CURP in visitaReg.vi_CURPS:
+        for vi_CURP in vi_CURPS:
 
             encontrado = False
 
@@ -118,35 +118,36 @@ class Zoologico:
         
             self.lista_visitas.append(nueva_visita)
             print(f"Visita registrada exitosamente con {cant_ninos} niños y {cant_adul} adultos.")
+
         else:
             print("No se puede realizar la visita, no hay visitantes registrados.")
     
     def mostrar_veterinarios(self):
-        print("`\n+++ VETERINARIOS +++\n")
+        print("\n+++ VETERINARIOS +++\n")
         for veterinario in self.lista_veterinarios:
             print(veterinario.mostrar_info_empleado())
             return
         
     def mostrar_mantenimientos(self):
-        print("`\n+++ MANTENIMIENTO +++\n")
+        print("\n+++ MANTENIMIENTO +++\n")
         for mantenimiento in self.lista_mantenimiento:
             print(mantenimiento.mostrar_info_empleado())
             return
         
     def mostrar_guias(self):
-        print("`\n+++ GUÍAS +++\n")
+        print("\n+++ GUÍAS +++\n")
         for guia in self.lista_guias:
             print(guia.mostrar_info_empleado())
             return
         
     def mostrar_animales(self):
-        print("`\n+++ ANIMALES +++\n")
+        print("\n+++ ANIMALES +++\n")
         for animal in self.lista_animales:
             print(animal.mostrar_info_animal())
             return
 
     def mostrar_visitantes(self):
-        print("`\n+++ VISITANTES +++\n")
+        print("\n+++ VISITANTES +++\n")
         for visitante in self.lista_visitantes_adultos:
             print("+++ ADULTOS +++")
             print(visitante.mostrar_info_visitante())
@@ -158,7 +159,7 @@ class Zoologico:
             return
 
     def mostrar_visitas(self):
-        print("`\n+++ VISITAS +++\n")
+        print("\n+++ VISITAS +++\n")
         for visita in self.lista_visitas:
             print(visita.mostrar_info_visita())
     

@@ -213,21 +213,9 @@ class Menú:
                 
             if opcion == 6:
                 print("\n+++ Registrar Visita +++")
-                cant_ninos = int(input("Ingrese la cantidad de niños: "))
-                cant_adul = int(input("Ingrese la cantidad de adultos: "))
-                fecha = datetime.now()
-                guia_CURP = input("Ingresa el CURP del guía: ")
-                vi_CURPS = input("Ingresa las CURP de los visitantes (separadas por comas): ").split(',')
-                vi_CURPS = [vi_CURP.strip() for vi_CURP in vi_CURPS]
-
-                _visita = Visita(
-                                 cant_ninos=cant_ninos,
-                                 cant_adul=cant_adul,
-                                 fecha_visita=fecha,
-                                 guia_CURP=guia_CURP,
-                                 vi_CURPS=vi_CURPS)
-                                
-                self.zoo.reg_visita(_visita)
+                guia_CURP = input("Ingrese el CURP del guía: ")
+                vi_CURPS = input("Ingrese los CURPs de los visitantes separados por comas: ").split(",")
+                self.zoo.reg_visita(guia_CURP, vi_CURPS)
          
             if opcion == 10:
                 self.zoo.mostrar_veterinarios()
