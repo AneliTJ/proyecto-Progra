@@ -73,8 +73,8 @@ class Zoologico:
                 cant_ninos=visitaReg.cant_ninos,
                 cant_adul=visitaReg.cant_adul,
                 fecha_visita=visitaReg.fecha_visita,
-                guia_CURP=guia.CURP,  # Aquí pasas el CURP del guía
-                vi_CURPS=[visitante.CURP for visitante in visitantes_encontrados]  # Lista de CURP de los visitantes
+                guia_CURP=guia.CURP, 
+                vi_CURPS=[visitante.CURP for visitante in visitantes_encontrados]
             )
             
             self.lista_visitas.append(nueva_visita)
