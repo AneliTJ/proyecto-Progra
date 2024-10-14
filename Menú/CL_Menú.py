@@ -58,7 +58,6 @@ class Menú:
                 mes_ingreso = int(input("Ingresa el mes de ingreso: "))
                 año_ingreso = int(input("Ingresa el año de ingreso: "))
                 f_ingreso = datetime(año_ingreso, mes_ingreso, dia_ingreso)
-
                 rfc = input("Ingresa el RFC: ")
                 salario = input("Ingresa el salario: ")
                 horario = input("Ingresa el horario: ")
@@ -189,14 +188,12 @@ class Menú:
 
                 dia_nacimiento = int(input("Ingresa el día de nacimiento: "))
                 mes_nacimiento = int(input("Ingresa el mes de nacimiento: "))
-                año_nacimiento = int(input("Ingresa el año de nacimiento: "))
-                f_nacimiento = datetime(año_nacimiento, mes_nacimiento, dia_nacimiento)
-
+                año_nacimiento_vis = int(input("Ingresa el año de nacimiento: "))
+                f_nacimiento = datetime(año_nacimiento_vis, mes_nacimiento, dia_nacimiento)
                 dia_ingreso = int(input("Ingresa el día de ingreso: "))
                 mes_ingreso = int(input("Ingresa el mes de ingreso: "))
                 año_ingreso = int(input("Ingresa el año de ingreso: "))
                 f_ingreso = datetime(año_ingreso, mes_ingreso, dia_ingreso)
-                id_visitante=self.zoo.generar_id_visitantes()
 
                 _visitante = Visitante(
                     vi_nombre=nombre,
@@ -204,13 +201,15 @@ class Menú:
                     vi_CURP=curp,
                     vi_fecha_nacimiento=f_nacimiento,
                     vi_fecha_reg=f_ingreso,
-                    vi_num_visitas=num_visitas,
-                    vi_id_visitas=id_visitante)
+                    vi_num_visitas=num_visitas)
+                
+                if (datetime.now().year) - (año_nacimiento_vis) >= 18:
+                    self.zoo.reg_visitante_mayor(_visitante)
+                    self.zoo.reg_visitante_mayor(visitanteReg=_visitante)
 
-                self.zoo.reg_visitante(_visitante)
-                self.zoo.reg_visitante(visitanteReg=_visitante)
-                print(id_visitante)
-        
+                else:
+                    self.zoo.reg_visitante_niños(_visitante)
+                    self.zoo.reg_visitante_niños(visitanteReg=_visitante)
                 
             if opcion == 6:
                 print("\n+++ Registrar Visita +++")

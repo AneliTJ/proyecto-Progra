@@ -8,7 +8,6 @@ from Animales.CL_Animal import Animal
 from Visitantes.CL_Visitante import Visitante
 from Visita.CL_Visita import Visita
 from typing import List
-from random import randint
 
 class Zoologico:
 
@@ -19,8 +18,31 @@ class Zoologico:
     lista_mantenimiento: List[Mantenimiento] = []
     lista_guias: List[Guia] = []
     lista_animales: List[Animal] = []
-    lista_visitantes: List[Visitante] = []
+    lista_visitantes_adultos: List[Visitante] = []
+    lista_visitantes_niños: List[Visitante] = []
     lista_visitas: List[Visita] = []
+
+    def __init__(self):
+        visitante = Visitante(
+            vi_nombre = "Patty",
+            vi_apellido = "Aguado",
+            vi_fecha_nacimiento = datetime(2004, 9, 7),
+            vi_CURP = "ANAPAT001",
+            vi_num_visitas = 4,
+            vi_fecha_reg = datetime(2024, 1, 1))
+        self.lista_visitantes.append(visitante)
+
+        guia = Guia(
+            guia_nombre = "Miguel",
+            guia_apellido = "Lemus",
+            guia_CURP = "MILEM002",
+            guia_fecha_nacimiento = datetime(2003, 8, 28),
+            guia_fecha_ingreso = datetime(2020, 1, 1),
+            guia_RFC = "LEMUSPAPU",
+            guia_salario = 9.99,
+            guia_horario = "09 a.m. - 11 p.m."
+        )
+        self.lista_guias.append(guia)
 
     def reg_veterinario(self, veterinarioReg: Veterinario):
         self.lista_empleados.append(veterinarioReg)
@@ -40,8 +62,12 @@ class Zoologico:
     def reg_animal(self, animalReg: Animal):
         self.lista_animales.append(animalReg)
 
-    def reg_visitante(self, visitanteReg: Visitante):
-        self.lista_visitantes.append(visitanteReg)
+    def reg_visitante_mayor(self, visitanteReg: Visitante):
+        self.lista_visitantes_adultos.append(visitanteReg)
+        self.lista_usuarios.append(visitanteReg)
+
+    def reg_visitante_niños(self, visitanteReg: Visitante):
+        self.lista_visitantes_niños.append(visitanteReg)
         self.lista_usuarios.append(visitanteReg)
 
     def reg_visita(self, visitaReg: Visita):
@@ -115,14 +141,6 @@ class Zoologico:
         print("`\n+++ VISITAS +++\n")
         for visita in self.lista_visitas:
             print(visita.mostrar_info_visita())
-
-    def generar_id_visitantes(self):
-        num_rand= randint (1,10000)
-        nu_visi= len(self.lista_visitantes)+1
-        id_visita=f"{num_rand}{nu_visi}"
-        return id_visita
-
-    
     
     
     
