@@ -31,7 +31,8 @@ class Menú:
     11. Mostrar Empleados (Mantenimiento)
     12. Mostrar Empleados (Guía)
     13. Mostrar Animales
-    14. Mostrar Visitas
+    14. Mostrar Visitantes
+    15. Mostrar Visitas
     
     20.Costo de la visita
 
@@ -196,7 +197,6 @@ class Menú:
                 año_ingreso = int(input("Ingresa el año de ingreso: "))
                 f_ingreso = datetime(año_ingreso, mes_ingreso, dia_ingreso)
                 id_visitante=self.zoo.generar_id_visitantes()
-                num_visitas +=1
 
                 _visitante = Visitante(
                     vi_nombre=nombre,
@@ -216,16 +216,22 @@ class Menú:
                 print("\n+++ Registrar Visita +++")
                 costo = float(input("Ingrese el costo total: "))
                 cant_ninos = int(input("Ingrese la cantidad de niños: "))
-                cant_adultos = int(input("Ingrese la cantidad de adultos: "))
+                cant_adul = int(input("Ingrese la cantidad de adultos: "))
                 fecha = datetime.now()
+                guia_CURP = input("Ingresa el CURP del guía: ")
+                vi_CURPS = input("Ingresa las CURP de los visitantes (separadas por comas): ").split(',')
+                vi_CURPS = [vi_CURP.strip() for vi_CURP in vi_CURPS]
 
                 _visita = Visita(costo_total=costo,
                                  cant_ninos=cant_ninos,
-                                 cant_adultos=cant_adultos,
-                                 fecha_visita=fecha)
-                
-                
+                                 cant_adul=cant_adul,
+                                 fecha_visita=fecha,
+                                 guia_CURP=guia_CURP,
+                                 vi_CURPS=vi_CURPS)
+                                
+                self.zoo.reg_visita(_visita)
 
+                
             if opcion == 10:
                 self.zoo.mostrar_veterinarios()
                 pass
@@ -247,9 +253,7 @@ class Menú:
                 pass
 
             if opcion == 15:
-                pass
-            
-
+                self.zoo.mostrar_visitas()
 
             if opcion == 20:
                 print("\n+++ Costo de la visita +++")
