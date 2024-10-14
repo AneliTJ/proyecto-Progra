@@ -30,7 +30,7 @@ class Zoologico:
             vi_CURP = "ANAPAT001",
             vi_num_visitas = 4,
             vi_fecha_reg = datetime(2024, 1, 1))
-        self.lista_visitantes.append(visitante)
+        self.lista_visitantes_adultos.append(visitante)
 
         guia = Guia(
             guia_nombre = "Miguel",
@@ -70,41 +70,54 @@ class Zoologico:
         self.lista_visitantes_niños.append(visitanteReg)
         self.lista_usuarios.append(visitanteReg)
 
-    def reg_visita(self, visitaReg: Visita):
+    def reg_visita(self, visitaReg: Visita, guia_CURP: str, vi_CURPS_: list):
+
+        fecha_visita = datetime.now()
         guia = None
-        visitantes_encontrados = []
-        
+
         for guia_reg in self.lista_guias:
-            if guia_reg.CURP == visitaReg.guia_CURP:
+            if guia_reg.CURP == guia_CURP:
                 guia = guia_reg
                 break
-        
+
         if not guia:
-            print(f"El guía con CURP {visitaReg.guia_CURP} no está registrado.")
+            print(f"El guía con CURP {guia_CURP} no está registrado.")
             return
 
+        visitantes_encontrados = []
+        cant_ninos = 0
+        cant_adul = 0
+
         for vi_CURP in visitaReg.vi_CURPS:
+
             encontrado = False
-            for visitante in self.lista_visitantes:
+
+            for visitante in self.lista_visitantes_adultos + self.lista_visitantes_niños:
                 if visitante.CURP == vi_CURP:
                     visitantes_encontrados.append(visitante)
-                    encontrado = True
-                    break
+                    if visitante in self.lista_visitantes_adultos:
+                        cant_adul += 1
+
+                    else:
+                        cant_ninos += 1
+                        encontrado = True
+                        break
+
             if not encontrado:
                 print(f"El visitante con CURP {vi_CURP} no está registrado.")
 
         if len(visitantes_encontrados) > 0:
+
             nueva_visita = Visita(
-                costo_total=visitaReg.costo_total,
-                cant_ninos=visitaReg.cant_ninos,
-                cant_adul=visitaReg.cant_adul,
-                fecha_visita=visitaReg.fecha_visita,
-                guia_CURP=guia.CURP, 
+                cant_ninos=cant_ninos,
+                cant_adul=cant_adul,
+                fecha_visita=fecha_visita,
+                guia_CURP=guia.CURP,
                 vi_CURPS=[visitante.CURP for visitante in visitantes_encontrados]
-            )
-            
+        )
+        
             self.lista_visitas.append(nueva_visita)
-            print("Visita registrada exitosamente.")
+            print(f"Visita registrada exitosamente con {cant_ninos} niños y {cant_adul} adultos.")
         else:
             print("No se puede realizar la visita, no hay visitantes registrados.")
     
@@ -134,9 +147,16 @@ class Zoologico:
 
     def mostrar_visitantes(self):
         print("`\n+++ VISITANTES +++\n")
-        for visitante in self.lista_visitantes:
+        for visitante in self.lista_visitantes_adultos:
+            print("+++ ADULTOS +++")
             print(visitante.mostrar_info_visitante())
-        
+            return
+
+        for visitante in self.lista_visitantes_niños:
+            print("\n+++ NIÑOS +++\n")
+            print(visitante.mostrar_info_visitante())
+            return
+
     def mostrar_visitas(self):
         print("`\n+++ VISITAS +++\n")
         for visita in self.lista_visitas:

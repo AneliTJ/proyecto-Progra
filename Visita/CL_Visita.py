@@ -4,15 +4,15 @@ from Visitantes.CL_Visitante import Visitante
 from datetime import datetime
 
 class Visita:
-    costo_total: float
+    # costo_total: float
     cant_ninos: int
     cant_adul: int
     fecha_visita: datetime
     guia_CURP: str
     visitantes: List[Visitante] = []
 
-    def __init__(self, costo_total: float, cant_ninos: int, cant_adul: int, fecha_visita: datetime, guia_CURP: str, vi_CURPS: List[str]):
-        self.costo_total = costo_total
+    def __init__(self, cant_ninos: int, cant_adul: int, fecha_visita: datetime, guia_CURP: str, vi_CURPS: List[str]):
+        # self.costo_total = costo_total
         self.cant_ninos = cant_ninos
         self.cant_adul = cant_adul
         self.fecha_visita = fecha_visita
@@ -21,7 +21,6 @@ class Visita:
 
     def mostrar_info_visita(self):
         return f"""
-        Costo total: {self.costo_total}
         Cantidad de niños: {self.cant_ninos}
         Cantidad de adultos: {self.cant_adul}
         Fecha de la visita: {self.fecha_visita}

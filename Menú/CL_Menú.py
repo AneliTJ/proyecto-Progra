@@ -213,7 +213,6 @@ class Menú:
                 
             if opcion == 6:
                 print("\n+++ Registrar Visita +++")
-                costo = float(input("Ingrese el costo total: "))
                 cant_ninos = int(input("Ingrese la cantidad de niños: "))
                 cant_adul = int(input("Ingrese la cantidad de adultos: "))
                 fecha = datetime.now()
@@ -221,7 +220,7 @@ class Menú:
                 vi_CURPS = input("Ingresa las CURP de los visitantes (separadas por comas): ").split(',')
                 vi_CURPS = [vi_CURP.strip() for vi_CURP in vi_CURPS]
 
-                _visita = Visita(costo_total=costo,
+                _visita = Visita(
                                  cant_ninos=cant_ninos,
                                  cant_adul=cant_adul,
                                  fecha_visita=fecha,
