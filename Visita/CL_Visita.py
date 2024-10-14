@@ -8,15 +8,15 @@ class Visita:
     cant_ninos: int
     cant_adul: int
     fecha_visita: datetime
-    guia_CURP: str
+    guia_CURPS: List[Guia] = []
     visitantes: List[Visitante] = []
 
-    def __init__(self, cant_ninos: int, cant_adul: int, fecha_visita: datetime, guia_CURP: str, vi_CURPS: List[str]):
+    def __init__(self, cant_ninos: int, cant_adul: int, fecha_visita: datetime, guia_CURPS: List[str], vi_CURPS: List[str]):
         # self.costo_total = costo_total
         self.cant_ninos = cant_ninos
         self.cant_adul = cant_adul
         self.fecha_visita = fecha_visita
-        self.guia_CURP = guia_CURP
+        self.guia_CURPS = guia_CURPS
         self.vi_CURPS = vi_CURPS 
 
     def mostrar_info_visita(self):
@@ -24,6 +24,6 @@ class Visita:
         Cantidad de niños: {self.cant_ninos}
         Cantidad de adultos: {self.cant_adul}
         Fecha de la visita: {self.fecha_visita}
-        Guía: {self.guia_CURP}
+        Guía: {', '.join(self.guia_CURPS)}
         Visitantes: {', '.join(self.vi_CURPS)}
         """

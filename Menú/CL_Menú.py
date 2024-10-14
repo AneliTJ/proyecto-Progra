@@ -213,9 +213,9 @@ class Menú:
                 
             if opcion == 6:
                 print("\n+++ Registrar Visita +++")
-                guia_CURP = input("Ingrese el CURP del guía: ")
-                vi_CURPS = input("Ingrese los CURPs de los visitantes separados por comas: ").split(",")
-                self.zoo.reg_visita(guia_CURP, vi_CURPS)
+                guia_CURPS = input("Ingrese el/los CURP de los guías (Separados por comas): ").split(",")
+                vi_CURPS = input("Ingrese el/los CURP de los visitantes (Separados por comas): ").split(",")
+                self.zoo.reg_visita(guia_CURPS, vi_CURPS)
          
             if opcion == 10:
                 self.zoo.mostrar_veterinarios()

@@ -23,26 +23,49 @@ class Zoologico:
     lista_visitas: List[Visita] = []
 
     def __init__(self):
-        visitante = Visitante(
+        visitante_1 = Visitante(
             vi_nombre = "Patty",
             vi_apellido = "Aguado",
             vi_fecha_nacimiento = datetime(2004, 9, 7),
             vi_CURP = "ANAPAT001",
             vi_num_visitas = 4,
-            vi_fecha_reg = datetime(2024, 1, 1))
-        self.lista_visitantes_adultos.append(visitante)
+            vi_fecha_reg = datetime(2024, 1, 1)
+            )
+        self.lista_visitantes_adultos.append(visitante_1)
+        
+        visitante_2 = Visitante(
+            vi_nombre = "Carlos",
+            vi_apellido = "Rubio",
+            vi_fecha_nacimiento = datetime(2010, 7, 7),
+            vi_CURP = "JACOBO002",
+            vi_num_visitas = 3,
+            vi_fecha_reg = datetime(2023, 1, 1)
+            )
+        self.lista_visitantes_niños.append(visitante_2)
 
-        guia = Guia(
+        guia_1 = Guia(
             guia_nombre = "Miguel",
             guia_apellido = "Lemus",
-            guia_CURP = "MILEM002",
+            guia_CURP = "MILEM001",
             guia_fecha_nacimiento = datetime(2003, 8, 28),
             guia_fecha_ingreso = datetime(2020, 1, 1),
             guia_RFC = "LEMUSPAPU",
             guia_salario = 9.99,
             guia_horario = "09 a.m. - 11 p.m."
-        )
-        self.lista_guias.append(guia)
+            )
+        self.lista_guias.append(guia_1)
+        
+        guia_2 = Guia(
+            guia_nombre = "Ian",
+            guia_apellido = "Cortés",
+            guia_CURP = "CORIAN002",
+            guia_fecha_nacimiento = datetime(2003, 5, 21),
+            guia_fecha_ingreso = datetime(2021, 2, 2),
+            guia_RFC = "CORTESPAPU",
+            guia_salario = 99.99,
+            guia_horario = "09 a.m. - 07 p.m."
+            )
+        self.lista_guias.append(guia_2)
 
     def reg_veterinario(self, veterinarioReg: Veterinario):
         self.lista_empleados.append(veterinarioReg)
@@ -70,19 +93,23 @@ class Zoologico:
         self.lista_visitantes_niños.append(visitanteReg)
         self.lista_usuarios.append(visitanteReg)
 
-    def reg_visita(self, guia_CURP: str, vi_CURPS: list):
+    def reg_visita(self, guias_CURPS: str, vi_CURPS: list):
 
         fecha_visita = datetime.now()
-        guia = None
+        
+        guias_encontrados = []
 
-        for guia_reg in self.lista_guias:
-            if guia_reg.CURP == guia_CURP:
-                guia = guia_reg
-                break
+        for guia_CURP in guias_CURPS:
 
-        if not guia:
-            print(f"El guía con CURP {guia_CURP} no está registrado.")
-            return
+            encontrado = False
+
+            for guia in self.lista_guias:
+                if guia.CURP == guia_CURP:
+                    guias_encontrados.append(guia)
+                    encontrado = True
+
+            if not encontrado:
+                print(f"El guia con CURP {guia_CURP} no está registrado.")
 
         visitantes_encontrados = []
         cant_ninos = 0
@@ -97,6 +124,7 @@ class Zoologico:
                     visitantes_encontrados.append(visitante)
                     if visitante in self.lista_visitantes_adultos:
                         cant_adul += 1
+                        encontrado = True
 
                     else:
                         cant_ninos += 1
@@ -112,15 +140,15 @@ class Zoologico:
                 cant_ninos=cant_ninos,
                 cant_adul=cant_adul,
                 fecha_visita=fecha_visita,
-                guia_CURP=guia.CURP,
-                vi_CURPS=[visitante.CURP for visitante in visitantes_encontrados]
-        )
+                guia_CURPS=[guia.CURP for guia in guias_encontrados],
+                vi_CURPS=[visitante.CURP for visitante in visitantes_encontrados])
         
             self.lista_visitas.append(nueva_visita)
             print(f"Visita registrada exitosamente con {cant_ninos} niños y {cant_adul} adultos.")
 
         else:
             print("No se puede realizar la visita, no hay visitantes registrados.")
+        
     
     def mostrar_veterinarios(self):
         print("\n+++ VETERINARIOS +++\n")
