@@ -3,9 +3,8 @@ from Usuarios.utils.Rol import Roles
 from datetime import datetime
 
 class Visitante(Usuario):
-    num_visitas: int
+    num_visitas: int = 0
     fecha_reg: datetime
-    id_visitas= str
     
     def __init__(self, 
                 vi_nombre: str, 
@@ -25,6 +24,10 @@ class Visitante(Usuario):
     
         self.num_visitas=vi_num_visitas
         self.fecha_reg=vi_fecha_reg
+        
+    def incrementar_visitas(self):
+        nume_visitas = self.num_visitas + 1
+        return nume_visitas
 
     def mostrar_info_visitante(self):
         nombre_completo= f"{self.nombre} {self.apellido}"

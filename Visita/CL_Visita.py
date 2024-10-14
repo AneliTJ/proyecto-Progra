@@ -17,7 +17,10 @@ class Visita:
         self.cant_adul = cant_adul
         self.fecha_visita = fecha_visita
         self.guia_CURPS = guia_CURPS
-        self.vi_CURPS = vi_CURPS 
+        self.vi_CURPS = vi_CURPS
+        
+        for visitante in self.visitantes:
+            visitante.incrementar_visitas()
 
     def mostrar_info_visita(self):
         return f"""

@@ -28,7 +28,7 @@ class Zoologico:
             vi_apellido = "Aguado",
             vi_fecha_nacimiento = datetime(2004, 9, 7),
             vi_CURP = "ANAPAT001",
-            vi_num_visitas = 4,
+            vi_num_visitas = 0,
             vi_fecha_reg = datetime(2024, 1, 1)
             )
         self.lista_visitantes_adultos.append(visitante_1)
@@ -38,7 +38,7 @@ class Zoologico:
             vi_apellido = "Rubio",
             vi_fecha_nacimiento = datetime(2010, 7, 7),
             vi_CURP = "JACOBO002",
-            vi_num_visitas = 3,
+            vi_num_visitas = 0,
             vi_fecha_reg = datetime(2023, 1, 1)
             )
         self.lista_visitantes_niños.append(visitante_2)
@@ -179,7 +179,6 @@ class Zoologico:
         for visitante in self.lista_visitantes_adultos:
             print("+++ ADULTOS +++")
             print(visitante.mostrar_info_visitante())
-            return
 
         for visitante in self.lista_visitantes_niños:
             print("\n+++ NIÑOS +++\n")
