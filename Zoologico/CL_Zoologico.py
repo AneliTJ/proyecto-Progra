@@ -30,7 +30,7 @@ class Zoologico:
             vi_apellido = "Aguado",
             vi_fecha_nacimiento = datetime(2004, 9, 7),
             vi_CURP = "ANAPAT001",
-            vi_num_visitas = 0,
+            vi_num_visitas = 1,
             vi_fecha_reg = datetime(2024, 1, 1)
             )
         self.lista_visitantes_adultos.append(visitante_1)
@@ -40,7 +40,7 @@ class Zoologico:
             vi_apellido = "Rubio",
             vi_fecha_nacimiento = datetime(2010, 7, 7),
             vi_CURP = "JACOBO002",
-            vi_num_visitas = 0,
+            vi_num_visitas = 4,
             vi_fecha_reg = datetime(2023, 1, 1)
             )
         self.lista_visitantes_niños.append(visitante_2)
@@ -68,6 +68,18 @@ class Zoologico:
             guia_horario = "09 a.m. - 07 p.m."
             )
         self.lista_guias.append(guia_2)
+        
+        mantenimiento_1 = Mantenimiento(
+            mant_nombre = "Vangelis",
+            mant_apellido = "Contreras",
+            mant_CURP = "CONT001",
+            mant_fecha_nacimiento = datetime(2003, 1, 13),
+            mant_fecha_ingreso = datetime(2023,3,3),
+            mant_RFC = "CONTPAPU",
+            mant_salario = 8,
+            mant_horario = "12 a.m. - 12 p.m."
+        )
+        self.lista_mantenimiento.append(mantenimiento_1)
 
     def reg_veterinario(self, veterinarioReg: Veterinario):
         self.lista_empleados.append(veterinarioReg)
@@ -116,6 +128,8 @@ class Zoologico:
         visitantes_encontrados = []
         cant_ninos = 0
         cant_adul = 0
+        costo_total_ni= 0
+        costo_total_adul = 0
 
         for vi_CURP in vi_CURPS:
 
@@ -123,18 +137,33 @@ class Zoologico:
 
             for visitante in self.lista_visitantes_adultos + self.lista_visitantes_niños:
                 if visitante.CURP == vi_CURP:
+                    
                     visitantes_encontrados.append(visitante)
                     if visitante in self.lista_visitantes_adultos:
                         cant_adul += 1
+                        costo_total_adul = 100
                         encontrado = True
-
+                        visitante.incrementar_visitas()
+                        
+                        if visitante.num_visitas%5 == 0:
+                            costo_total_adul = visitante.descuento() * 100
+                            
                     else:
                         cant_ninos += 1
                         encontrado = True
-                        break
-
+                        visitante.incrementar_visitas()
+                        costo_total_ni = 50
+                        
+                        if visitante.num_visitas%5 == 0:
+                            costo_total_ni = visitante.descuento() * 50
+                    
+      
+                    costo_total=costo_total_adul + costo_total_ni      
             if not encontrado:
                 print(f"El visitante con CURP {vi_CURP} no está registrado.")
+        
+        
+
 
         if len(visitantes_encontrados) > 0:
 
@@ -143,7 +172,8 @@ class Zoologico:
                 cant_adul=cant_adul,
                 fecha_visita=fecha_visita,
                 guia_CURPS=[guia.CURP for guia in guias_encontrados],
-                vi_CURPS=[visitante.CURP for visitante in visitantes_encontrados])
+                vi_CURPS=[visitante.CURP for visitante in visitantes_encontrados],
+                costo_total=costo_total)
         
             self.lista_visitas.append(nueva_visita)
             print(f"Visita registrada exitosamente con {cant_ninos} niños y {cant_adul} adultos.")
@@ -232,7 +262,8 @@ class Zoologico:
         print("\n+++ MANTENIMIENTOS A HACER +++\n")
         for control in self.lista_controles:
             print(control.mostrar_info_control())
-    
-    
+
+        
+
     
     pass

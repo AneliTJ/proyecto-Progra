@@ -26,8 +26,7 @@ class Visitante(Usuario):
         self.fecha_reg=vi_fecha_reg
         
     def incrementar_visitas(self):
-        nume_visitas = self.num_visitas + 1
-        return nume_visitas
+        self.num_visitas += 1
 
     def mostrar_info_visitante(self):
         nombre_completo= f"{self.nombre} {self.apellido}"
@@ -39,4 +38,10 @@ class Visitante(Usuario):
         Fecha de registro: {self.fecha_reg}"""
         return info_visitante
     
+    def descuento(self):
+        descuento = 0.8 
+        return descuento
+            
+
+
     

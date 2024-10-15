@@ -37,7 +37,6 @@ class Menú:
     15. Mostrar Visitas
     16. Mostrar mantenimiento a hacer
     
-    20.Costo de la visita
 
 
     40. Salir
@@ -261,10 +260,5 @@ class Menú:
             if opcion == 16:
                 self.zoo.mostrar_controles()
 
-            if opcion == 20:
-                print("\n+++ Costo de la visita +++")
-                print(precio)
-
             if opcion == 40:
-                precio = 0
                 break

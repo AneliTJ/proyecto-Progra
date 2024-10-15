@@ -8,20 +8,19 @@ class Visita:
     cant_ninos: int
     cant_adul: int
     fecha_visita: datetime
+    costo_total: float
     guia_CURPS: List[Guia] = []
     visitantes: List[Visitante] = []
 
-    def __init__(self, cant_ninos: int, cant_adul: int, fecha_visita: datetime, guia_CURPS: List[str], vi_CURPS: List[str]):
+    def __init__(self, cant_ninos: int, cant_adul: int, fecha_visita: datetime, guia_CURPS: List[str], vi_CURPS: List[str], costo_total:float):
         # self.costo_total = costo_total
         self.cant_ninos = cant_ninos
         self.cant_adul = cant_adul
         self.fecha_visita = fecha_visita
         self.guia_CURPS = guia_CURPS
         self.vi_CURPS = vi_CURPS
+        self.costo_total=costo_total
         
-        for visitante in self.visitantes:
-            visitante.incrementar_visitas()
-
     def mostrar_info_visita(self):
         return f"""
         Cantidad de niños: {self.cant_ninos}
@@ -29,4 +28,11 @@ class Visita:
         Fecha de la visita: {self.fecha_visita}
         Guía: {', '.join(self.guia_CURPS)}
         Visitantes: {', '.join(self.vi_CURPS)}
+        Costo: {self.costo_total}
         """
+    
+    def registrar_visitantes(self, visitantes: List[Visitante]):
+        for visitante in visitantes:
+            visitante.incrementar_visitas()
+
+    
