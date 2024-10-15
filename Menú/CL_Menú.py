@@ -6,6 +6,7 @@ from Mantenimiento.CL_Mantenimiento import Mantenimiento
 from Animales.CL_Animal import Animal
 from Visitantes.CL_Visitante import Visitante
 from Visita.CL_Visita import Visita
+from Control.CL_Control import Control
 
 
 class Menú:
@@ -26,6 +27,7 @@ class Menú:
     4. Registrar Animal
     5. Registrar Visitante
     6. Registrar Visita
+    7. Registrar mantenimiento a hacer
 
     10. Mostrar Empleados (Veterinario)
     11. Mostrar Empleados (Mantenimiento)
@@ -33,6 +35,7 @@ class Menú:
     13. Mostrar Animales
     14. Mostrar Visitantes
     15. Mostrar Visitas
+    16. Mostrar mantenimiento a hacer
     
     20.Costo de la visita
 
@@ -216,7 +219,22 @@ class Menú:
                 guia_CURPS = input("Ingrese el/los CURP de los guías (Separados por comas): ").split(",")
                 vi_CURPS = input("Ingrese el/los CURP de los visitantes (Separados por comas): ").split(",")
                 self.zoo.reg_visita(guia_CURPS, vi_CURPS)
-         
+
+            if opcion == 7:
+                print("\n+++ Registrar mantenimiento a hacer +++")
+                mant_CURPS = input("Ingrese el/los CURP de los empleados de mantenimiento (Separados por comas): ").split(",")
+                ids_animal = input("Ingrese el/los ID de los animales (Separados por comas): ").split(",")
+                proceso = input("Ingrese el proceso a realizar: ")
+                observaciones = input("Ingrese las observaciones: ")
+                _control = Control(
+                    mant_CURPS=mant_CURPS, 
+                    ids_animal=ids_animal,
+                    proceso=proceso,
+                    observaciones=observaciones,
+                    fecha_proceso=datetime.now()
+                )
+                self.zoo.reg_control(_control)
+
             if opcion == 10:
                 self.zoo.mostrar_veterinarios()
                 pass
@@ -239,6 +257,9 @@ class Menú:
 
             if opcion == 15:
                 self.zoo.mostrar_visitas()
+
+            if opcion == 16:
+                self.zoo.mostrar_controles()
 
             if opcion == 20:
                 print("\n+++ Costo de la visita +++")

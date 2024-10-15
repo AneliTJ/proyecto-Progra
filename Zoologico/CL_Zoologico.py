@@ -7,6 +7,7 @@ from Mantenimiento.CL_Mantenimiento import Mantenimiento
 from Animales.CL_Animal import Animal
 from Visitantes.CL_Visitante import Visitante
 from Visita.CL_Visita import Visita
+from Control.CL_Control import Control
 from typing import List
 
 class Zoologico:
@@ -21,6 +22,7 @@ class Zoologico:
     lista_visitantes_adultos: List[Visitante] = []
     lista_visitantes_niños: List[Visitante] = []
     lista_visitas: List[Visita] = []
+    lista_controles: List[Control] = []
 
     def __init__(self):
         visitante_1 = Visitante(
@@ -148,7 +150,43 @@ class Zoologico:
 
         else:
             print("No se puede realizar la visita, no hay visitantes registrados.")
-        
+
+    def reg_control(self, controlReg: Control):
+        fecha_proceso = datetime.now()
+
+        mantenimientos_encontrados = []
+        for mant_CURP in controlReg.mant_CURPS:
+            encontrado = False
+            for mantenimiento in self.lista_mantenimiento:
+                if mantenimiento.CURP == mant_CURP:
+                    mantenimientos_encontrados.append(mantenimiento)
+                    encontrado = True
+            if not encontrado:
+                print(f"El empleado de mantenimiento con CURP {mant_CURP} no está registrado.")
+
+        animales_encontrados = []
+        for id_animal in controlReg.ids_animal:
+            encontrado = False
+            for animal in self.lista_animales:
+                if animal.id_animal == id_animal:
+                    animales_encontrados.append(animal)
+                    encontrado = True
+            if not encontrado:
+                print(f"El animal con ID {id_animal} no está registrado.")
+
+        if len(mantenimientos_encontrados) > 0 and len(animales_encontrados) > 0:
+            nuevo_control = Control(
+                mant_CURPS=[mantenimiento.CURP for mantenimiento in mantenimientos_encontrados],
+                ids_animal=[animal.id_animal for animal in animales_encontrados],
+                proceso=controlReg.proceso,
+                observaciones=controlReg.observaciones,
+                fecha_proceso=fecha_proceso
+            )
+            self.lista_controles.append(nuevo_control)
+            print("Mantenimiento registrado exitosamente.")
+        else:
+            print("No se pudo registrar el mantenimiento, verifica los datos ingresados.")
+  
     
     def mostrar_veterinarios(self):
         print("\n+++ VETERINARIOS +++\n")
@@ -189,6 +227,11 @@ class Zoologico:
         print("\n+++ VISITAS +++\n")
         for visita in self.lista_visitas:
             print(visita.mostrar_info_visita())
+
+    def mostrar_controles(self):
+        print("\n+++ MANTENIMIENTOS A HACER +++\n")
+        for control in self.lista_controles:
+            print(control.mostrar_info_control())
     
     
     
