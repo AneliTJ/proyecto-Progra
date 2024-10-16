@@ -8,6 +8,7 @@ from Animales.CL_Animal import Animal
 from Visitantes.CL_Visitante import Visitante
 from Visita.CL_Visita import Visita
 from Control.CL_Control import Control
+from Director.CL_Director import Director
 from typing import List
 
 class Zoologico:
@@ -16,6 +17,7 @@ class Zoologico:
     lista_empleados: List[Empleado] = []
 
     lista_veterinarios: List[Veterinario] = []
+    lista_director: List[Director] = []
     lista_mantenimiento: List[Mantenimiento] = []
     lista_guias: List[Guia] = []
     lista_animales: List[Animal] = []
@@ -25,6 +27,17 @@ class Zoologico:
     lista_controles: List[Control] = []
 
     def __init__(self):
+
+        director = Director(
+            dir_nombre="Kevin",
+            dir_apellido="García",
+            dir_CURP="GAHK",
+            dir_fecha_nacimiento=datetime(2003,12,20),
+            dir_contraseña="1234",
+            dir_nom_usuario="ZZZ",
+        )
+        self.lista_director.append(director)
+
         visitante_1 = Visitante(
             vi_nombre = "Patty",
             vi_apellido = "Aguado",
@@ -222,25 +235,25 @@ class Zoologico:
         print("\n+++ VETERINARIOS +++\n")
         for veterinario in self.lista_veterinarios:
             print(veterinario.mostrar_info_empleado())
-            return
+
         
     def mostrar_mantenimientos(self):
         print("\n+++ MANTENIMIENTO +++\n")
         for mantenimiento in self.lista_mantenimiento:
             print(mantenimiento.mostrar_info_empleado())
-            return
+
         
     def mostrar_guias(self):
         print("\n+++ GUÍAS +++\n")
         for guia in self.lista_guias:
             print(guia.mostrar_info_empleado())
-            return
+
         
     def mostrar_animales(self):
         print("\n+++ ANIMALES +++\n")
         for animal in self.lista_animales:
             print(animal.mostrar_info_animal())
-            return
+
 
     def mostrar_visitantes(self):
         print("\n+++ VISITANTES +++\n")
@@ -251,7 +264,7 @@ class Zoologico:
         for visitante in self.lista_visitantes_niños:
             print("\n+++ NIÑOS +++\n")
             print(visitante.mostrar_info_visitante())
-            return
+
 
     def mostrar_visitas(self):
         print("\n+++ VISITAS +++\n")
@@ -263,7 +276,10 @@ class Zoologico:
         for control in self.lista_controles:
             print(control.mostrar_info_control())
 
-        
-
-    
+    def validar_login(self, usuario:str, contraseña:str):
+        for director in self.lista_director:
+            if director.nom_usuario == usuario:
+                if director.contraseña == contraseña:
+                    return director
+        return None
     pass

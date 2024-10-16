@@ -25,14 +25,12 @@ class Empleado(Usuario):
     def mostrar_info_empleado(self):
         nombre_completo= f"{self.nombre} {self.apellido}"
         info_empleado= f"""
-
-        Nombre: {nombre_completo} 
-        Fecha de nacimiento: {self.fecha_nacimiento} 
-        Fecha de ingreso: {self.fecha_ingreso} 
-        RFC: {self.rfc} 
-        Salario: {self.salario}
-        Horario: {self.horario}
-        CURP: {self.CURP}
-
-"""
+Nombre: {nombre_completo} 
+Fecha de nacimiento: {self.fecha_nacimiento} 
+Fecha de ingreso: {self.fecha_ingreso} 
+RFC: {self.rfc} 
+Salario: {self.salario}
+Horario: {self.horario}
+CURP: {self.CURP}
+    """
         return info_empleado

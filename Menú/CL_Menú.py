@@ -11,6 +11,21 @@ from Control.CL_Control import Control
 
 class Menú:
     zoo: Zoologico = Zoologico()
+
+    def login(self):
+        while True:
+
+            print("+++++INICIAR SESIÓN+++++")
+
+            usuario = input("Ingresa tu Usuario: ")
+            contraseña = input("Ingresa tu contraseña: ")
+
+            administrador = self.zoo.validar_login(usuario=usuario, contraseña=contraseña)
+
+            if administrador is None:
+                print("Usuario o contraseña inválidos.")
+            else:
+                self.mostrar_menú()
     
     
     def mostrar_menú(self):
@@ -73,7 +88,7 @@ class Menú:
                                         vet_salario=salario,
                                         vet_horario=horario)
                 
-                self.zoo.reg_veterinario(_veterinario)
+
                 self.zoo.reg_veterinario(veterinarioReg=_veterinario)
 
             if opcion == 2:
@@ -105,7 +120,7 @@ class Menú:
                                         mant_salario=salario,
                                         mant_horario=horario)
                 
-                self.zoo.reg_mantenimiento(_mantenimiento)
+
                 self.zoo.reg_mantenimiento(mantenimientoReg=_mantenimiento)
 
             if opcion == 3:
@@ -137,7 +152,7 @@ class Menú:
                              guia_salario=salario,
                              guia_horario=horario)
                 
-                self.zoo.reg_guia(_guia)
+
                 self.zoo.reg_guia(guiaReg=_guia)
 
             if opcion == 4:
@@ -179,7 +194,7 @@ class Menú:
                     vacunas=vacunas
                 )
 
-                self.zoo.reg_animal(_animal)
+
                 self.zoo.reg_animal(animalReg=_animal)
 
             if opcion == 5:
@@ -206,7 +221,7 @@ class Menú:
                     vi_num_visitas=num_visitas)
                 
                 if (datetime.now().year) - (año_nacimiento_vis) >= 18:
-                    self.zoo.reg_visitante_mayor(_visitante)
+
                     self.zoo.reg_visitante_mayor(visitanteReg=_visitante)
 
                 else:

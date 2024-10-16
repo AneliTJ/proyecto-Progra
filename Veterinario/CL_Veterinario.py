@@ -27,6 +27,6 @@ class Veterinario(Empleado):
             rol=Roles.VETERINARIO
             )
         
-        pass
+
 
     
