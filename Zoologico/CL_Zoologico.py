@@ -283,3 +283,38 @@ class Zoologico:
                     return director
         return None
     pass
+
+    def eliminar_veterinario(self, vet_CURP_eliminar:str):
+        for veterinario in self.lista_veterinarios:
+            if veterinario.CURP == vet_CURP_eliminar:
+                self.lista_veterinarios.remove(veterinario)
+                print("Veterinario eliminado correctamente.")
+                return
+        print("No se encontró al veterinario con esa CURP.")
+    
+
+    def eliminar_guia(self, guia_CURP_eliminar:str):
+        for guia in self.lista_guias:
+            if guia.CURP == guia_CURP_eliminar:
+                self.lista_guias.remove(guia)
+                
+                print("Guía eliminado correctamente.")
+                return
+        print("No se encontró al guía con esa CURP.")
+
+    def eliminar_mantenimiento(self, mant_CURP_eliminar:str):
+        for mantenimiento in self.lista_mantenimiento:
+            if mantenimiento.CURP == mant_CURP_eliminar:
+                self.lista_mantenimiento.remove(mantenimiento)
+                print("Empleado de mantenimiento eliminado.")
+                return
+        print("No se encomtro empleado de mantenimiento con esa CURP.")
+    
+    
+    def eliminar_animal(self, id_animal_eliminar:str):
+        for animal in self.lista_animales:
+            if animal.id_animal == id_animal_eliminar:
+                self.lista_animales.remove(animal)
+                print("Animal eliminado.")
+                return
+        print("No se encontro al animal con esa ID.")

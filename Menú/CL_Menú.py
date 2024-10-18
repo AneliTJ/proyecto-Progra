@@ -51,9 +51,13 @@ class Menú:
     14. Mostrar Visitantes
     15. Mostrar Visitas
     16. Mostrar mantenimiento a hacer
+
+    17. Eliminar Empleado (Veterinario)
+    18. Eliminar Empleado (Mantenimiento)
+    19. Eliminar Empleado (Guía)
+    20. Eliminar Animal
+
     
-
-
     40. Salir
     """
             )
@@ -225,7 +229,7 @@ class Menú:
                     self.zoo.reg_visitante_mayor(visitanteReg=_visitante)
 
                 else:
-                    self.zoo.reg_visitante_niños(_visitante)
+
                     self.zoo.reg_visitante_niños(visitanteReg=_visitante)
                 
             if opcion == 6:
@@ -275,5 +279,28 @@ class Menú:
             if opcion == 16:
                 self.zoo.mostrar_controles()
 
+            if opcion == 17:
+                print("\n+++ Eliminar veterinario +++")
+                vet_curp = input("Ingrese el CURP del veterinario que desees eliminar: ")
+                self.zoo.eliminar_veterinario(vet_CURP_eliminar=vet_curp)
+                pass
+
+            if opcion == 18:
+                print("\n+++ Eliminar empleado de mantenimiento +++")
+                mant_CURP = input("Ingresa la CURP del empleado de mantenimiento que desees eliminar: ")
+                self.zoo.eliminar_mantenimiento(mant_CURP_eliminar=mant_CURP)
+
+            if opcion == 19:
+                print("\n+++ Eliminar guía +++")
+                guia_CURP_eliminar= input("Ingresa la CURP del guia que desees eliminar: ")
+                self.zoo.eliminar_guia(guia_CURP_eliminar=guia_CURP_eliminar) 
+
+                
+            if opcion == 20:
+                print("\n+++ Eliminar animal +++")
+                id_animal_eliminar= input("Ingrese el ID del animal que desees eliminar: ")
+                self.zoo.eliminar_animal(id_animal_eliminar=id_animal_eliminar)
+                pass
+            
             if opcion == 40:
                 break
